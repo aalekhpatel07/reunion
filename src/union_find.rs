@@ -18,11 +18,21 @@ pub trait UnionFindTrait<N: Copy + Eq + Hash + Clone> {
 }
 
 
-
 impl<T> UnionFind<T>
     where T: Copy + Eq + Hash + Clone
 {
-    pub fn new(size: usize) -> UnionFind<T> {
+    pub fn new() -> UnionFind<T> {
+        let parents: HashMap<T, T> = HashMap::new();
+        let rank: HashMap<T, usize> = HashMap::new();
+        // for 
+        UnionFind {
+            _size: 0,
+            parents,
+            rank
+        }
+    }
+
+    pub fn with_capacity(size: usize) -> UnionFind<T> {
         let parents: HashMap<T, T> = HashMap::with_capacity(size);
         let rank: HashMap<T, usize> = HashMap::with_capacity(size);
         // for 
@@ -45,6 +55,7 @@ impl<T> UnionFindTrait<T> for UnionFind<T>
     fn find(&mut self, node: T) -> T {
         if !self.parents.contains_key(&node) {
             self.parents.insert(node, node);
+            self._size += 1;
         }
 
         if !(node.eq(self.parents.get(&node).unwrap())) {

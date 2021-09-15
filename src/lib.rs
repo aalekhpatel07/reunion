@@ -1,5 +1,7 @@
-pub mod union_find;
+mod union_find;
 
+
+pub use union_find::*;
 // Python/WASM bindings go here.
 // 
 // Subset of the API can be selectively exposed.
@@ -7,17 +9,11 @@ pub mod union_find;
 #[cfg(test)]
 mod tests {
 
-    use crate::union_find::*;
+    use crate::*;
     use std::collections::HashSet;
 
     fn create_union_find_usize(size: usize) -> UnionFind<usize> {
-        UnionFind::<usize>::new(size)
-    }
-    fn create_union_find_u8(size: usize) -> UnionFind<u8> {
-        UnionFind::<u8>::new(size)
-    }
-    fn create_union_find_u16(size: usize) -> UnionFind<u16> {
-        UnionFind::<u16>::new(size)
+        UnionFind::<usize>::with_capacity(size)
     }
 
     #[test]
