@@ -1,6 +1,6 @@
 [package]
 name = "reunion"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2018"
 authors = ["Aalekh Patel <aalekh.gwpeck.7998@icloud.com>"]
 description = "A generic implementation of the Union-Rank data-structure."
