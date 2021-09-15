@@ -3,7 +3,7 @@ mod union_find;
 pub use union_find::{UnionFind, UnionFindTrait};
 
 // Python/WASM bindings go here.
-// 
+//
 // Subset of the API can be selectively exposed.
 
 #[cfg(test)]
@@ -29,7 +29,6 @@ mod tests {
         uf.union(4, 3);
         uf.union(6, 5);
 
-
         let mut hs1 = HashSet::new();
         hs1.insert(1);
         hs1.insert(2);
@@ -51,17 +50,16 @@ mod tests {
 
         subsets = uf.into_subsets();
         assert_eq!(subsets.len(), 2);
-        
+
         hs3.extend(&hs1);
 
         assert!(&subsets.contains(&hs3));
         assert!(&subsets.contains(&hs2));
-        
+
         let mut uf_clone = uf.clone();
         uf_clone.find(2);
 
         assert_eq!(&uf, &uf_clone);
         println!("{}", &uf);
     }
-
 }
