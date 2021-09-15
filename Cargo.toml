@@ -3,6 +3,10 @@ name = "reunion"
 version = "0.1.0"
 edition = "2018"
 authors = ["Aalekh Patel <aalekh.gwpeck.7998@icloud.com>"]
+description = "A generic implementation of the Union-Rank data-structure."
+license-file = "LICENSE"
+documentation = "https://www.github.com/aalekhpatel07/reunion"
+repository = "https://www.github.com/aalekhpatel07/reunion"
 
 [lib]
 name = "reunion"
