@@ -1,0 +1,12 @@
+[package]
+name = "reunion"
+version = "0.1.0"
+edition = "2018"
+authors = ["Aalekh Patel <aalekh.gwpeck.7998@icloud.com>"]
+
+[lib]
+name = "reunion"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+# pyo3 = { version = "0.12.4", features = ["extension-module"]}
