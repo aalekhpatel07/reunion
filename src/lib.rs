@@ -1,7 +1,7 @@
 mod union_find;
 
+pub use union_find::{UnionFind, UnionFindTrait};
 
-pub use union_find::*;
 // Python/WASM bindings go here.
 // 
 // Subset of the API can be selectively exposed.

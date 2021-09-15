@@ -9,58 +9,62 @@ Some [interesting lecture notes](https://www.cs.cmu.edu/~avrim/451f13/lectures/l
 In `Cargo.toml`, add this crate as a dependency.
 
 ```toml
-...
 [dependencies]
 reunion = { version = "0.1" }
-...
 ```
 ### API
 
 #### Example 1
 
-*Task*: Create a UnionFind data structure of arbitrary size that contains `usize` at its elements. Then, union a few elements and capture the state of the data structure after that.
+*Task*: Create a UnionFind data structure of arbitrary size that contains `usize` at its elements.
+Then, union a few elements and capture the state of the data structure after that.
 
 *Solution*: 
 
 ```rust
-	use reunion::{UnionFind, UnionFindTrait};
 
-	// Create a UnionFind data structure of arbitrary size that contains subsets of usizes.
-	let mut uf1 = UnionFind::<usize>::new();
+use reunion::{UnionFind, UnionFindTrait};
+use std::collections::HashSet;
 
-	// Note: Trivial subsets (i.e. singletons) are ignored in the data structure because they can always be calculated based on the state and the context.
+fn main() {
+    // Create a UnionFind data structure of arbitrary size that contains subsets of usizes.
+    let mut uf1 = UnionFind::<usize>::new();
 
-	println!("Freshly created structure: {}", uf1);
+    // Note: Trivial subsets (i.e. singletons) are ignored in the data structure because they can always be calculated based on the state and the context.
 
-	uf1.union(2, 1);
-	uf1.union(4, 3);
-	uf1.union(6, 5);
-	uf1.union(1, 5);
+    println!("Freshly created structure: {}", uf1);
 
-	println!("After a few unions: {}", uf1);
+    uf1.union(2, 1);
+    uf1.union(4, 3);
+    uf1.union(6, 5);
+    uf1.union(1, 5);
 
-	let mut hs1 = HashSet::new();
-	hs1.insert(1);
-	hs1.insert(2);
-	hs1.insert(6);
-	hs1.insert(5);
+    println!("After a few unions: {}", uf1);
 
-	let mut hs2 = HashSet::new();
-	hs2.insert(3);
-	hs2.insert(4);
+    let mut hs1 = HashSet::new();
+    hs1.insert(1);
+    hs1.insert(2);
+    hs1.insert(6);
+    hs1.insert(5);
 
-	let subsets = uf1.into_subsets();
+    let mut hs2 = HashSet::new();
+    hs2.insert(3);
+    hs2.insert(4);
 
-	assert_eq!(subsets.len(), 2);
+    let subsets = uf1.into_subsets();
 
-	assert!(&subsets.contains(&hs1));
-	assert!(&subsets.contains(&hs2));
+    assert_eq!(subsets.len(), 2);
 
-	// Iterate over the subsets.
+    assert!(&subsets.contains(&hs1));
+    assert!(&subsets.contains(&hs2));
 
-	for partition in uf1 {
-		println!("{:?#}", partition);
-	}
+    // Iterate over the subsets.
+
+    for partition in uf1 {
+        println!("{:?}", partition);
+    }
+}
+
 ```
 
 #### Example 2
