@@ -51,7 +51,7 @@ fn main() {
     hs2.insert(3);
     hs2.insert(4);
 
-    let subsets = uf1.into_subsets();
+    let subsets = uf1.subsets();
 
     assert_eq!(subsets.len(), 2);
 

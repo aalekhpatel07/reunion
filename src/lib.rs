@@ -39,7 +39,7 @@ mod tests {
         hs3.insert(5);
         hs3.insert(6);
 
-        let mut subsets = uf.into_subsets();
+        let mut subsets = uf.subsets();
         assert_eq!(subsets.len(), 3);
 
         assert!(&subsets.contains(&hs1));
@@ -48,7 +48,7 @@ mod tests {
 
         uf.union(1, 5);
 
-        subsets = uf.into_subsets();
+        subsets = uf.subsets();
         assert_eq!(subsets.len(), 2);
 
         hs3.extend(&hs1);
