@@ -1,5 +1,20 @@
 # A Disjoint-Set data structure (aka Union-Find w/ Rank)
 
+## What is Union-Find?
+
+Suppose you have a collection `S` of elements `e1`, `e2`, `...`, `en`, and wish to group them into different collections using operations:
+
+- "put `ei` and `ej` into the same group" (union),
+- "give me a representative of the group `ei` belongs to" (find).
+
+Then a Union-Find data structure helps to store the underlying groups very efficiently and implements this API.
+
+## (Some) Applications
+
+- **Detect Cycles in Graph**: Given a graph `G`, we can put the endpoints of edges into the same group (same connected component) unless there is a pair of endpoints `(ei, ej)` that share a group representative. If that happens, there was already a path existing between them, and adding this edge will add multiple paths, which cannot be the case for acyclic graphs.
+
+- **Number of connected components in Graph**: Given a graph `G`, put the endpoints of edges into the same group (same connected component). Once all nodes are exhausted, the number of groups formed is the number of connected components in `G`.
+
 Some [interesting lecture notes](https://www.cs.cmu.edu/~avrim/451f13/lectures/lect0912.pdf) regarding Union-Find.
 
 ## Usage
