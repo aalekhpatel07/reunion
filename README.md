@@ -114,8 +114,9 @@ To benchmark on your machine:
 You should see some output like this:
 
 ```
-#Find: 2497150, #Union: 1048575, #Total: 3545725, Time: 1.027244379s, Time per operation: 289.712µs
-#Find: 2497150, #Union: 1048575, #Total: 3545725, Time: 1.009215098s, Time per operation: 284.628µs
+#Find: 2497150, #Union: 1048575, #Total: 3545725, Time: 1.013497126s, Time per operation: 285ns
+#Find: 2497150, #Union: 1048575, #Total: 3545725, Time: 1.013323348s, Time per operation: 285ns
+#Find: 2497150, #Union: 1048575, #Total: 3545725, Time: 1.012333206s, Time per operation: 285ns
 ...
 
 Big Merge (20, 10000)   time:   [1.0175 s 1.0190 s 1.0205 s]                                     

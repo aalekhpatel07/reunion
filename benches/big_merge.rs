@@ -50,7 +50,7 @@ fn test_big_merge(max_rank: usize, trials: u32) {
     }
     
     let duration = instant.elapsed();
-    println!("#Find: {}, #Union: {}, #Total: {}, Time: {:?}, Time per operation: {:?}", find_count, union_count, find_count + union_count, duration, ((duration * 1000_u32)) / ((find_count + union_count) as u32) );
+    println!("#Find: {}, #Union: {}, #Total: {}, Time: {:?}, Time per operation: {:?}", find_count, union_count, find_count + union_count, duration, duration / ((find_count + union_count) as u32) );
 }
 
 
