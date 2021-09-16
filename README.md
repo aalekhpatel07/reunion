@@ -47,35 +47,52 @@ fn main() {
     // Create a UnionFind data structure of arbitrary size that contains subsets of usizes.
     let mut uf1 = UnionFind::<usize>::new();
 
-    // Note: Trivial subsets (i.e. singletons) are ignored in the data structure because they can always be calculated based on the state and the context.
+	println!("Initial state: {}", &uf);
+	println!("All elements form their own group (singletons).");
+	println!(format!("{:?}", uf.subsets());
+	uf.union(2, 1);
+	println!("After combining the groups that contains 2 and 1: {}", &uf);
+	uf.union(4, 3);
+	println!("After combining the groups that contains 4 and 3: {}", &uf);
+	uf.union(6, 5);
+	println!("After combining the groups that contains 6 and 5: {}", &uf);
 
-    println!("Freshly created structure: {}", uf1);
+	let mut hs1 = HashSet::new();
+	hs1.insert(1);
+	hs1.insert(2);
+	let mut hs2 = HashSet::new();
+	hs2.insert(3);
+	hs2.insert(4);
+	let mut hs3 = HashSet::new();
+	hs3.insert(5);
+	hs3.insert(6);
 
-    uf1.union(2, 1);
-    uf1.union(4, 3);
-    uf1.union(6, 5);
-    uf1.union(1, 5);
+	let mut subsets = uf.subsets();
+	assert_eq!(subsets.len(), 3);
 
-    println!("After a few unions: {}", uf1);
+	assert!(&subsets.contains(&hs1));
+	assert!(&subsets.contains(&hs2));
+	assert!(&subsets.contains(&hs3));
 
-    let mut hs1 = HashSet::new();
-    hs1.insert(1);
-    hs1.insert(2);
-    hs1.insert(6);
-    hs1.insert(5);
+	uf.union(1, 5);
 
-    let mut hs2 = HashSet::new();
-    hs2.insert(3);
-    hs2.insert(4);
+	println!("After combining the groups that contains 1 and 5: {}", &uf);
 
-    let subsets = uf1.subsets();
+	subsets = uf.subsets();
+	assert_eq!(subsets.len(), 2);
 
-    assert_eq!(subsets.len(), 2);
+	hs3.extend(&hs1);
 
-    assert!(&subsets.contains(&hs1));
-    assert!(&subsets.contains(&hs2));
+	assert!(&subsets.contains(&hs3));
+	assert!(&subsets.contains(&hs2));
 
-    // Iterate over the subsets.
+	let mut uf_clone = uf.clone();
+	uf_clone.find(2);
+
+	assert_eq!(&uf, &uf_clone);
+	println!("{}", &uf);
+
+    // It is possible to iterate over the subsets.
 
     for partition in uf1 {
         println!("{:?}", partition);
