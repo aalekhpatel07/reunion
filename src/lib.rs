@@ -25,9 +25,16 @@ mod tests {
     #[test]
     fn union() {
         let mut uf = create_union_find_usize(9);
+        
+        println!("Initially, all subsets are singleton, so the result must be empty.");
+        assert_eq!(format!("{:?}", &uf.subsets()), "[]");
+        println!("{:?}", &uf.subsets());
         uf.union(2, 1);
+        println!("After union of (2, 1) {:?}", &uf.subsets());
         uf.union(4, 3);
+        println!("After union of (4, 3) {:?}", &uf.subsets());
         uf.union(6, 5);
+        println!("After union of (6, 5) {:?}", &uf.subsets());
 
         let mut hs1 = HashSet::new();
         hs1.insert(1);
@@ -46,7 +53,9 @@ mod tests {
         assert!(&subsets.contains(&hs2));
         assert!(&subsets.contains(&hs3));
 
+        println!("Before union of (1, 5) {:?}", &uf.subsets());
         uf.union(1, 5);
+        println!("After union of (1, 5) {:?}", &uf.subsets());
 
         subsets = uf.subsets();
         assert_eq!(subsets.len(), 2);
@@ -56,10 +65,13 @@ mod tests {
         assert!(&subsets.contains(&hs3));
         assert!(&subsets.contains(&hs2));
 
-        let mut uf_clone = uf.clone();
-        uf_clone.find(2);
 
+        let mut uf_clone = uf.clone();
+        println!("Before find (2) {:?}", &uf_clone.subsets());
+        uf_clone.find(2);
+        println!("After find (2) {:?}", &uf_clone.subsets());
+        println!("The results must be same because a find operation does not modify the subsets formed.");
         assert_eq!(&uf, &uf_clone);
-        println!("{}", &uf);
+
     }
 }

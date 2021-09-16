@@ -1,6 +1,6 @@
 [package]
 name = "reunion"
-version = "0.1.6"
+version = "0.1.7"
 edition = "2018"
 authors = ["Aalekh Patel <aalekh.gwpeck.7998@icloud.com>"]
 description = "A generic implementation of the Union-Find w/ Rank data structure."
@@ -11,5 +11,13 @@ repository = "https://www.github.com/aalekhpatel07/reunion"
 [lib]
 name = "reunion"
 crate-type = ["cdylib", "rlib"]
+
+[dev-dependencies]
+criterion = { version = "0.3", features = ["html_reports"] }
+rand = "0.8"
+
+[[bench]]
+name = "big_merge"
+harness = false
 
 [dependencies]
