@@ -31,7 +31,7 @@ fn test_big_merge(max_rank: usize, trials: u32) {
             let idx_plus_merge_step_rep: u32 = uf.find((idx + merge_step) as u32);
             assert!(idx_rep == idx_plus_merge_step_rep);
 
-            find_count += 2;
+            find_count += 4;
             union_count += 1;
         }
 
