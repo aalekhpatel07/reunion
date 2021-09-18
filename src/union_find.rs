@@ -4,13 +4,13 @@ use std::fmt;
 use std::hash::Hash;
 
 #[derive(Debug, Clone, PartialEq)]
-pub struct UnionFind<N: Copy + Hash + Eq + Clone> {
+pub struct UnionFind<N: Hash + Eq + Clone> {
     _size: usize,
     pub parents: HashMap<N, N>,
     rank: HashMap<N, usize>,
 }
 
-pub trait UnionFindTrait<N: Copy + Eq + Hash + Clone> {
+pub trait UnionFindTrait<N: Eq + Hash + Clone> {
     fn find(&mut self, node: N) -> N;
     fn union(&mut self, x: N, y: N);
     fn subsets(&mut self) -> Vec<HashSet<N>>;
@@ -27,7 +27,7 @@ where
 
 impl<T> UnionFind<T>
 where
-    T: Copy + Eq + Hash + Clone,
+    T: Eq + Hash + Clone,
 {
     pub fn new() -> UnionFind<T> {
         let parents: HashMap<T, T> = HashMap::new();
@@ -58,34 +58,34 @@ where
 
 impl<T> UnionFindTrait<T> for UnionFind<T>
 where
-    T: Copy + Eq + Hash + Clone,
+    T: Eq + Hash + Clone,
 {
     #[allow(clippy::map_entry)]
     fn find(&mut self, node: T) -> T {
         if !self.parents.contains_key(&node) {
-            self.parents.insert(node, node);
+            self.parents.insert(node.clone(), node.clone());
             self._size += 1;
         }
 
         if !(node.eq(self.parents.get(&node).unwrap())) {
-            let found = self.find(*self.parents.get(&node).unwrap());
-            self.parents.insert(node, found);
+            let found = self.find((*self.parents.get(&node).unwrap()).clone() );
+            self.parents.insert(node.clone(), found);
         }
-        *self.parents.get(&node).unwrap()
+        (*self.parents.get(&node).unwrap()).clone()
     }
 
     fn union(&mut self, x: T, y: T) {
-        let x_root = self.find(x);
-        let y_root = self.find(y);
+        let x_root = self.find(x.clone());
+        let y_root = self.find(y.clone());
 
         #[allow(clippy::map_entry)]
         if !self.rank.contains_key(&x_root) {
-            self.rank.insert(x_root, 0);
+            self.rank.insert(x_root.clone(), 0);
         }
 
         #[allow(clippy::map_entry)]
         if !self.rank.contains_key(&y_root) {
-            self.rank.insert(y_root, 0);
+            self.rank.insert(y_root.clone(), 0);
         }
         if x_root.eq(&y_root) {
             return;
@@ -94,9 +94,9 @@ where
         let y_root_rank: usize = *self.rank.get(&y_root).unwrap();
 
         if x_root_rank > y_root_rank {
-            self.parents.insert(y_root, x_root);
+            self.parents.insert(y_root.clone(), x_root.clone());
         } else {
-            self.parents.insert(x_root, y_root);
+            self.parents.insert(x_root.clone(), y_root.clone());
             if x_root_rank == y_root_rank {
                 self.rank.insert(y_root, y_root_rank + 1);
             }
@@ -107,18 +107,18 @@ where
         let mut result: HashMap<T, HashSet<T>> = HashMap::with_capacity(self.size());
 
         let rank_cp = self.rank.clone();
-
-        for (&node, _) in rank_cp.iter() {
-            let root = self.find(node);
+    
+        for (node, _) in rank_cp.iter() {
+            let root = self.find((*node).clone());
 
             #[allow(clippy::map_entry)]
             if !result.contains_key(&root) {
                 let mut hset = HashSet::new();
-                hset.insert(node);
+                hset.insert((*node).clone());
                 result.insert(root, hset);
             } else {
                 let prev = &mut *result.get_mut(&root).unwrap();
-                prev.insert(node);
+                prev.insert((*node).clone());
             }
         }
 
@@ -128,7 +128,7 @@ where
 
 impl<T> IntoIterator for UnionFind<T>
 where
-    T: Copy + Eq + Hash + Clone,
+    T: Eq + Hash + Clone,
 {
     type Item = HashSet<T>;
     type IntoIter = std::vec::IntoIter<Self::Item>;
@@ -140,7 +140,7 @@ where
 
 impl<T> fmt::Display for UnionFind<T>
 where
-    T: Clone + Eq + Hash + Copy + fmt::Debug,
+    T: Clone + Eq + Hash + fmt::Debug,
 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let s = format!(
