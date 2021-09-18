@@ -148,8 +148,9 @@ where
 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let s = format!(
-            "<UnionFind size={}, non_trivial_subsets={:?}>",
+            "<UnionFind size={}, entries={:?}, non_trivial_subsets={:?}>",
             self.size(),
+            &self.entries(),
             &self.clone().subsets()
         );
 
