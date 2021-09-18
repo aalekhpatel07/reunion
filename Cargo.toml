@@ -1,6 +1,6 @@
 [package]
 name = "reunion"
-version = "0.1.10"
+version = "0.1.11"
 edition = "2018"
 authors = ["Aalekh Patel <aalekh.gwpeck.7998@icloud.com>"]
 description = "A generic implementation of the Union-Find w/ Rank data structure."
@@ -8,7 +8,6 @@ license-file = "LICENSE"
 documentation = "https://www.github.com/aalekhpatel07/reunion/blob/master/README.md"
 repository = "https://www.github.com/aalekhpatel07/reunion"
 keywords = ["algorithms", "data-structures", "union-find", "disjoint-set", "math"]
-category = "algorithms"
 
 [lib]
 name = "reunion"

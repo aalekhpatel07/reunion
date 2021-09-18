@@ -54,6 +54,10 @@ where
     pub fn size(&self) -> usize {
         self._size
     }
+
+    pub fn entries(&self) -> Vec<T> {
+        self.rank.clone().into_keys().collect()
+    }
 }
 
 impl<T> UnionFindTrait<T> for UnionFind<T>
@@ -75,8 +79,8 @@ where
     }
 
     fn union(&mut self, x: T, y: T) {
-        let x_root = self.find(x.clone());
-        let y_root = self.find(y.clone());
+        let x_root = self.find(x);
+        let y_root = self.find(y);
 
         #[allow(clippy::map_entry)]
         if !self.rank.contains_key(&x_root) {
@@ -94,9 +98,9 @@ where
         let y_root_rank: usize = *self.rank.get(&y_root).unwrap();
 
         if x_root_rank > y_root_rank {
-            self.parents.insert(y_root.clone(), x_root.clone());
+            self.parents.insert(y_root, x_root);
         } else {
-            self.parents.insert(x_root.clone(), y_root.clone());
+            self.parents.insert(x_root, y_root.clone());
             if x_root_rank == y_root_rank {
                 self.rank.insert(y_root, y_root_rank + 1);
             }

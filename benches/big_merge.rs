@@ -2,7 +2,6 @@ use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use reunion::{UnionFind, UnionFindTrait};
 use rand::Rng;
 use std::time::Instant;
-use std::time::Duration;
 
 
 fn test_big_merge(max_rank: usize, trials: u32) {
