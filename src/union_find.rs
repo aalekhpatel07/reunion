@@ -19,7 +19,7 @@ pub trait UnionFindTrait<N: Eq + Hash + Clone> {
 
 impl<T> Default for UnionFind<T>
 where
-    T: Copy + Eq + Hash + Clone,
+    T: Eq + Hash + Clone,
 {
     fn default() -> Self {
         Self::new()
